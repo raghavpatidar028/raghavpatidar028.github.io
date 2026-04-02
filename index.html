@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raghav Patidar — Data Analyst & Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1117;
+    --bg3: #111820;
+    --surface: #161d27;
+    --border: #1e2a38;
+    --border2: #243040;
+    --text: #e8edf3;
+    --muted: #6b7f96;
+    --muted2: #4a5c70;
+    --accent: #3b82f6;
+    --accent2: #06b6d4;
+    --accent3: #8b5cf6;
+    --green: #10b981;
+    --orange: #f59e0b;
+    --red: #ef4444;
+    --glow: rgba(59,130,246,0.15);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: white !important;
+    padding: 8px 20px;
+    font-size: 12px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    text-decoration: none;
+    letter-spacing: 0.02em !important;
+    transition: opacity 0.2s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 64px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px; right: -100px;
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    bottom: -300px; left: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    border: 1px solid rgba(59,130,246,0.3);
+    padding: 6px 14px;
+    margin-bottom: 32px;
+    background: rgba(59,130,246,0.06);
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero-name .accent { color: var(--accent); }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-title .highlight {
+    color: var(--accent2);
+    font-weight: 600;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 580px;
+    margin-bottom: 44px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: white;
+    padding: 14px 28px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: #2563eb; transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    padding: 14px 28px;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .hero-stat-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    display: block;
+  }
+
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section {
+    padding: 100px 64px;
+    position: relative;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .section-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.8;
+    margin-bottom: 64px;
+  }
+
+  /* ─── METRICS BAND ─── */
+  .metrics-band {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 64px;
+  }
+
+  .metrics-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .metric-cell {
+    background: var(--bg2);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .metric-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .metric-big.blue { color: var(--accent); }
+  .metric-big.cyan { color: var(--accent2); }
+  .metric-big.purple { color: var(--accent3); }
+  .metric-big.green { color: var(--green); }
+  .metric-big.orange { color: var(--orange); }
+  .metric-big.red { color: var(--red); }
+
+  .metric-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    line-height: 1.4;
+  }
+
+  /* ─── EXPERTISE ─── */
+  .expertise-section { background: var(--bg); }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .expertise-card {
+    background: var(--bg2);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .expertise-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--card-accent, var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .expertise-card:hover::before { transform: scaleX(1); }
+  .expertise-card:hover { background: var(--surface); }
+
+  .expertise-icon {
+    width: 44px; height: 44px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border2);
+  }
+
+  .expertise-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .expertise-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted2);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  .experience-section { background: var(--bg3); }
+
+  .exp-timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 8px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .exp-item {
+    position: relative;
+    margin-bottom: 56px;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -37px; top: 8px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px rgba(59,130,246,0.15), 0 0 16px rgba(59,130,246,0.4);
+  }
+
+  .exp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 12px;
+  }
+
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .exp-role {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .exp-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .exp-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .exp-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .badge-blue { background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); }
+  .badge-green { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.2); }
+  .badge-purple { background: rgba(139,92,246,0.1); color: var(--accent3); border: 1px solid rgba(139,92,246,0.2); }
+
+  .exp-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 700px;
+  }
+
+  .exp-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .exp-highlight {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .exp-highlight::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+
+  .exp-highlight strong { color: var(--text); font-weight: 500; }
+
+  .award-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.2);
+    padding: 10px 16px;
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--orange);
+  }
+
+  /* ─── PROJECTS ─── */
+  .projects-section { background: var(--bg); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .project-card {
+    background: var(--bg2);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .project-card:hover { background: var(--surface); }
+
+  .project-card.featured {
+    grid-column: span 2;
+  }
+
+  .project-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .project-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .project-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  .project-impact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .project-impact::before {
+    content: '↑';
+    font-size: 13px;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+  }
+
+  /* ─── SKILLS ─── */
+  .skills-section { background: var(--bg3); }
+
+  .skills-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px 80px;
+    margin-bottom: 0;
+  }
+
+  .skill-group h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .skill-group h4::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+
+  .skill-pill:hover {
+    color: var(--text);
+    border-color: var(--border2);
+  }
+
+  .skill-pill.core {
+    color: var(--accent);
+    background: rgba(59,130,246,0.08);
+    border-color: rgba(59,130,246,0.2);
+  }
+
+  /* ─── EDUCATION & CERTS ─── */
+  .edu-section { background: var(--bg); }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    margin-bottom: 48px;
+  }
+
+  .edu-card {
+    background: var(--bg2);
+    padding: 36px 32px;
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .edu-school {
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .edu-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+  }
+
+  .certs-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .cert-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .cert-badge .cert-icon {
+    font-size: 18px;
+  }
+
+  /* ─── CONTACT / FOOTER ─── */
+  .contact-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 80px 64px;
+    text-align: center;
+  }
+
+  .contact-section .section-title { font-size: 40px; }
+
+  .contact-sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 64px;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    color: var(--text);
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .contact-link.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  .contact-link.primary:hover {
+    background: #2563eb;
+    color: white;
+  }
+
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 24px 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── DIVIDER ─── */
+  .h-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 56px 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section, .metrics-band { padding: 64px 24px; }
+    .hero { padding: 100px 24px 64px; }
+    .metrics-grid { grid-template-columns: repeat(3, 1fr); }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .skills-columns { grid-template-columns: 1fr; gap: 32px; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+    .exp-header { flex-direction: column; gap: 8px; }
+    .exp-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">RP<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:raghavpatidar997@gmail.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Open to Senior IC & Lead Roles · Chicago, IL · F-1 OPT</div>
+    <h1 class="hero-name">Raghav<br><span class="accent">Patidar</span></h1>
+    <p class="hero-title">Data Analyst & Engineer · <span class="highlight">ML · BI · Data Pipelines</span></p>
+    <p class="hero-desc">
+      5+ years building data systems that drive real decisions — from enterprise ETL pipelines processing 10TB+/week at Infosys, to ML models that won an Innovation Award, to teaching the next generation of analysts at UC Missouri.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:raghavpatidar997@gmail.com" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        Contact Me
+      </a>
+      <a href="https://www.linkedin.com/in/raghav-patidar-604527165/" target="_blank" class="btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-number">5+</span>
+        <span class="hero-stat-label">Years Experience</span>
+      </div>
+      <div>
+        <span class="hero-stat-number">95%</span>
+        <span class="hero-stat-label">Forecast Accuracy</span>
+      </div>
+      <div>
+        <span class="hero-stat-number">10TB+</span>
+        <span class="hero-stat-label">Weekly Data Processed</span>
+      </div>
+      <div>
+        <span class="hero-stat-number">15+</span>
+        <span class="hero-stat-label">ETL Pipelines Built</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS BAND -->
+<div class="metrics-band">
+  <div class="metrics-grid">
+    <div class="metric-cell">
+      <span class="metric-big blue">95%</span>
+      <span class="metric-label">Demand Forecast<br>Accuracy</span>
+    </div>
+    <div class="metric-cell">
+      <span class="metric-big cyan">10TB+</span>
+      <span class="metric-label">Data Processed<br>Per Week</span>
+    </div>
+    <div class="metric-cell">
+      <span class="metric-big green">85%</span>
+      <span class="metric-label">Bad Data Reduction<br>via ETL Quality</span>
+    </div>
+    <div class="metric-cell">
+      <span class="metric-big purple">200+</span>
+      <span class="metric-label">Hours Saved<br>Annually</span>
+    </div>
+    <div class="metric-cell">
+      <span class="metric-big orange">45%</span>
+      <span class="metric-label">Query Performance<br>Improvement</span>
+    </div>
+    <div class="metric-cell">
+      <span class="metric-big" style="color:var(--green);">80%</span>
+      <span class="metric-label">Report Time Cut<br>via Automation</span>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERTISE -->
+<section id="expertise" class="expertise-section">
+  <div class="container">
+    <span class="section-tag">What I Do</span>
+    <h2 class="section-title">Areas of Expertise</h2>
+    <p class="section-sub">Across 5+ years, I've operated across the full data stack — from raw pipeline architecture to executive dashboards to ML model deployment.</p>
+
+    <div class="expertise-grid">
+      <div class="expertise-card" style="--card-accent: var(--accent);">
+        <div class="expertise-icon">📊</div>
+        <h3>Data Analytics & BI</h3>
+        <p>Building dashboards and reports that executives actually trust — clean KPI frameworks, real-time pipeline-backed visuals, and decision-support tools in Power BI and Tableau.</p>
+        <div class="expertise-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">DAX</span>
+          <span class="tag">OBIEE</span>
+          <span class="tag">OLAP</span>
+        </div>
+      </div>
+      <div class="expertise-card" style="--card-accent: var(--accent2);">
+        <div class="expertise-icon">⚙️</div>
+        <h3>Data Engineering & ETL</h3>
+        <p>Designing and operating production-grade pipelines from ingestion to transformation. Built 15+ ETL pipelines processing 10TB+/week, refactored legacy jobs from 6 hours to 45 minutes.</p>
+        <div class="expertise-tags">
+          <span class="tag">Apache Airflow</span>
+          <span class="tag">dbt</span>
+          <span class="tag">Snowflake</span>
+          <span class="tag">AWS Glue</span>
+          <span class="tag">Oracle</span>
+        </div>
+      </div>
+      <div class="expertise-card" style="--card-accent: var(--accent3);">
+        <div class="expertise-icon">🤖</div>
+        <h3>Machine Learning & AI</h3>
+        <p>Award-winning ML work: XGBoost/ARIMA ensemble forecasting at 95% accuracy, behavioral churn prediction, NLP chatbots, anomaly detection, and lead-scoring models that moved revenue.</p>
+        <div class="expertise-tags">
+          <span class="tag">XGBoost</span>
+          <span class="tag">ARIMA</span>
+          <span class="tag">Scikit-learn</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="expertise-card" style="--card-accent: var(--green);">
+        <div class="expertise-icon">☁️</div>
+        <h3>Cloud & Modern Data Stack</h3>
+        <p>Hands-on with the AWS ecosystem (S3, Glue, Athena, Redshift, Lambda) and modern stack tooling. Medallion architecture in dbt Cloud, CI/CD workflows, and data lake design.</p>
+        <div class="expertise-tags">
+          <span class="tag">AWS S3</span>
+          <span class="tag">Redshift</span>
+          <span class="tag">dbt Cloud</span>
+          <span class="tag">Medallion Arch</span>
+          <span class="tag">GCP BigQuery</span>
+        </div>
+      </div>
+      <div class="expertise-card" style="--card-accent: var(--orange);">
+        <div class="expertise-icon">🗃️</div>
+        <h3>SQL & Database Design</h3>
+        <p>Advanced SQL across Oracle, PostgreSQL, Snowflake, and BigQuery. Dimensional modeling with star and snowflake schemas. OLAP cube design with 45% query performance improvements.</p>
+        <div class="expertise-tags">
+          <span class="tag">SQL</span>
+          <span class="tag">Star Schema</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">Query Optimization</span>
+        </div>
+      </div>
+      <div class="expertise-card" style="--card-accent: var(--red);">
+        <div class="expertise-icon">🎯</div>
+        <h3>Leadership & Strategy</h3>
+        <p>Led Agile teams of 5+ analysts, presented quarterly roadmaps to C-suite, mentored 3 junior data engineers, and acted as Teaching Assistant for 2 years at University of Central Missouri.</p>
+        <div class="expertise-tags">
+          <span class="tag">Agile/Scrum</span>
+          <span class="tag">JIRA</span>
+          <span class="tag">Stakeholder Mgmt</span>
+          <span class="tag">Mentorship</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="experience-section">
+  <div class="container">
+    <span class="section-tag">Career</span>
+    <h2 class="section-title">Work Experience</h2>
+    <p class="section-sub">From junior analyst to project lead — building data systems at enterprise scale and teaching data methods at the graduate level.</p>
+
+    <div class="exp-timeline">
+
+      <!-- Infosys -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">Infosys Private Limited</div>
+            <div class="exp-role">Data Analyst → Project Lead</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">Jan 2020 – Jul 2023 · 3.5 yrs</span>
+            <span class="exp-badge badge-blue">Full-Time</span>
+          </div>
+        </div>
+        <p class="exp-desc">
+          Started as a Data Analyst building BI dashboards and ETL pipelines, promoted to Project Lead managing cross-functional teams and enterprise data infrastructure. Worked across analytics, ML, data engineering, and stakeholder strategy for global enterprise clients.
+        </p>
+        <div class="exp-highlights">
+          <div class="exp-highlight"><strong>Innovation Award</strong> — recognized for deploying high-impact predictive models (XGBoost/ARIMA ensemble, 95% forecast accuracy) that drove measurable enterprise ROI.</div>
+          <div class="exp-highlight">Engineered <strong>15+ ETL/ELT pipelines</strong> in Python, SQL, and dbt processing 10TB+ weekly; designed medallion architecture in dbt Cloud.</div>
+          <div class="exp-highlight">Built <strong>Power BI and Tableau dashboards</strong> that cut manual reporting by 50+ hours/month and improved decision-making speed by 30–50%.</div>
+          <div class="exp-highlight">Refactored legacy ETL scripts — reduced execution time from <strong>6 hours to 45 minutes</strong>; automated financial reports saving <strong>200+ hours/year</strong>.</div>
+          <div class="exp-highlight">Led behavioral AI churn prediction model driving <strong>75% increase in customer retention</strong>; deployed anomaly detection reducing bad data by 85%.</div>
+          <div class="exp-highlight">Mentored <strong>5 junior analysts</strong> and 3 junior data engineers; presented quarterly insights to C-suite influencing 10% YoY revenue growth strategy.</div>
+          <div class="exp-highlight">Designed OLAP cubes and star/snowflake schemas in Oracle/OBIEE achieving <strong>45% query performance improvement</strong>.</div>
+          <div class="exp-highlight">Architected Salesforce-to-Power BI integration that reduced case resolution time by <strong>20%</strong> and saved 15 hrs/week in manual reporting.</div>
+        </div>
+        <div class="award-box">
+          🏆 Infosys Innovation Award — ML & Analytics Excellence
+        </div>
+      </div>
+
+      <!-- UCM -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">University of Central Missouri</div>
+            <div class="exp-role">Teaching Assistant — Data Analysis</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">Aug 2023 – May 2025 · 2 yrs</span>
+            <span class="exp-badge badge-green">Academic</span>
+          </div>
+        </div>
+        <p class="exp-desc">
+          Supported graduate coursework in data analytics while pursuing MS in Computer Information Systems. Guided students on Python, SQL, statistical methods, and data visualization — bridging theory and applied practice.
+        </p>
+        <div class="exp-highlights">
+          <div class="exp-highlight">Delivered workshops on <strong>Python, SQL, and statistical methods</strong> for data manipulation and visualization to graduate cohorts.</div>
+          <div class="exp-highlight">Collaborated with professor to <strong>design and optimize data analytics coursework</strong> and lesson plans for MS program.</div>
+          <div class="exp-highlight">Guided students through data cleaning, analysis workflows, and debugging for applied coursework projects.</div>
+          <div class="exp-highlight">Assessed data-driven assignments for methodological rigor, code efficiency, and insight clarity.</div>
+        </div>
+      </div>
+
+      <!-- SGSITS -->
+      <div class="exp-item">
+        <div class="exp-header">
+          <div>
+            <div class="exp-company">S.G.S.I.T.S. Indore</div>
+            <div class="exp-role">Event Manager (Student Leadership)</div>
+          </div>
+          <div class="exp-meta">
+            <span class="exp-period">Jan 2016 – Jul 2019</span>
+            <span class="exp-badge badge-purple">Leadership</span>
+          </div>
+        </div>
+        <div class="exp-highlights">
+          <div class="exp-highlight">Executed <strong>10+ campus events</strong> with 200+ attendees — workshops, cultural fests, and the university's first alumni mentorship mixer for 100+ students.</div>
+          <div class="exp-highlight">Designed promotional campaigns boosting event turnout by <strong>40% year-over-year</strong> through targeted digital outreach.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-section">
+  <div class="container">
+    <span class="section-tag">Work Samples</span>
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">A selection of production systems, ML models, and analytics tools built across enterprise and academic contexts.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card featured">
+        <span class="project-num">01 · Featured</span>
+        <h3>Demand Forecasting System — Infosys Innovation Award</h3>
+        <p>Ensemble forecasting model combining XGBoost gradient boosting and ARIMA time-series in a hybrid framework to predict demand across product lines. Integrated with Power BI for real-time stakeholder monitoring. Deployed to production at enterprise scale — earned the Infosys Innovation Award.</p>
+        <div class="project-impact">95% forecast accuracy · 75% increase in customer engagement</div>
+        <div class="project-stack">
+          <span class="tag">Python</span><span class="tag">XGBoost</span><span class="tag">ARIMA</span><span class="tag">Power BI</span><span class="tag">Scikit-learn</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">02</span>
+        <h3>Enterprise ETL Pipeline System</h3>
+        <p>Architected and maintained 15+ production ETL pipelines using Apache Airflow orchestration, dbt transformations, and Oracle, processing over 10TB of enterprise data weekly.</p>
+        <div class="project-impact">10TB+/week · ETL time 6hrs → 45 min</div>
+        <div class="project-stack">
+          <span class="tag">Apache Airflow</span><span class="tag">dbt</span><span class="tag">Oracle</span><span class="tag">Snowflake</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">03</span>
+        <h3>Customer Churn Prediction</h3>
+        <p>Behavioral AI model identifying at-risk customers using classification algorithms, enabling proactive retention campaigns across customer segments at scale.</p>
+        <div class="project-impact">75% increase in customer retention traffic</div>
+        <div class="project-stack">
+          <span class="tag">Python</span><span class="tag">Behavioral AI</span><span class="tag">Scikit-learn</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">04</span>
+        <h3>OLAP Cubes & Dimensional Data Models</h3>
+        <p>Designed enterprise OLAP cubes and star/snowflake schemas using Oracle and OBIEE, optimizing query paths and delivering measurable performance improvements for executive dashboards.</p>
+        <div class="project-impact">45% query performance improvement</div>
+        <div class="project-stack">
+          <span class="tag">Oracle</span><span class="tag">OBIEE</span><span class="tag">Star Schema</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">05</span>
+        <h3>NLP Chatbot — CIS Department</h3>
+        <p>Flask-based conversational chatbot for UCM's CIS department using Python and NLTK for intent classification and entity extraction, automating student query handling in real time.</p>
+        <div class="project-impact">40% reduction in query response time</div>
+        <div class="project-stack">
+          <span class="tag">Python</span><span class="tag">NLTK</span><span class="tag">Flask</span><span class="tag">NLP</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">06</span>
+        <h3>AWS Data Lake Architecture</h3>
+        <p>Designed and deployed scalable data lake on AWS with S3, Glue, Athena, and Redshift. Multi-zone medallion architecture with audit logging achieving 99.9% pipeline reliability.</p>
+        <div class="project-impact">85% reduction in bad data · 99.9% reliability</div>
+        <div class="project-stack">
+          <span class="tag">AWS S3</span><span class="tag">Glue</span><span class="tag">Athena</span><span class="tag">Redshift</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">07</span>
+        <h3>Power BI Resource Management Tool</h3>
+        <p>Cross-team resource allocation visibility tool in Power BI, automating manual tracking and delivering operational efficiency improvements and reduced reporting burden for project leads.</p>
+        <div class="project-impact">11% efficiency gain · 20% less manual effort</div>
+        <div class="project-stack">
+          <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">08</span>
+        <h3>Sales Forecasting Model</h3>
+        <p>Python ARIMA time-series model forecasting sales trends, integrated with interactive Power BI dashboard for real-time stakeholder monitoring and inventory adjustment.</p>
+        <div class="project-impact">95% model accuracy</div>
+        <div class="project-stack">
+          <span class="tag">Python</span><span class="tag">ARIMA</span><span class="tag">Power BI</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="project-num">09</span>
+        <h3>Salesforce × Power BI Integration</h3>
+        <p>Live CRM-to-dashboard integration enabling real-time analytics for support and sales teams. Eliminated 15 weekly hours of manual reporting and improved case resolution speed.</p>
+        <div class="project-impact">20% faster case resolution · 15 hrs/week saved</div>
+        <div class="project-stack">
+          <span class="tag">Salesforce</span><span class="tag">Power BI</span><span class="tag">SQL</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="container">
+    <span class="section-tag">Technical Stack</span>
+    <h2 class="section-title">Skills & Tools</h2>
+    <p class="section-sub">The tools I reach for most often — and the broader ecosystem I've worked across over 5 years in data.</p>
+
+    <div class="skills-columns">
+      <div>
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="skill-pills">
+            <span class="skill-pill core">Python</span>
+            <span class="skill-pill core">SQL</span>
+            <span class="skill-pill">R</span>
+            <span class="skill-pill">Java</span>
+            <span class="skill-pill">DAX</span>
+            <span class="skill-pill">VBA</span>
+            <span class="skill-pill">JavaScript</span>
+          </div>
+        </div>
+        <div style="height:32px;"></div>
+        <div class="skill-group">
+          <h4>BI & Visualization</h4>
+          <div class="skill-pills">
+            <span class="skill-pill core">Power BI</span>
+            <span class="skill-pill core">Tableau</span>
+            <span class="skill-pill">OBIEE</span>
+            <span class="skill-pill">Looker</span>
+            <span class="skill-pill">Excel</span>
+            <span class="skill-pill">Figma</span>
+            <span class="skill-pill">ThoughtSpot</span>
+          </div>
+        </div>
+        <div style="height:32px;"></div>
+        <div class="skill-group">
+          <h4>Machine Learning</h4>
+          <div class="skill-pills">
+            <span class="skill-pill core">XGBoost</span>
+            <span class="skill-pill core">Scikit-learn</span>
+            <span class="skill-pill">ARIMA</span>
+            <span class="skill-pill">NLTK</span>
+            <span class="skill-pill">TensorFlow</span>
+            <span class="skill-pill">PyTorch</span>
+            <span class="skill-pill">Pandas</span>
+            <span class="skill-pill">NumPy</span>
+          </div>
+        </div>
+        <div style="height:32px;"></div>
+        <div class="skill-group">
+          <h4>Statistics</h4>
+          <div class="skill-pills">
+            <span class="skill-pill">Regression (OLS)</span>
+            <span class="skill-pill">A/B Testing</span>
+            <span class="skill-pill">Hypothesis Testing</span>
+            <span class="skill-pill">SPSS</span>
+            <span class="skill-pill">STATA</span>
+            <span class="skill-pill">SAS</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group">
+          <h4>Data Engineering & ETL</h4>
+          <div class="skill-pills">
+            <span class="skill-pill core">Apache Airflow</span>
+            <span class="skill-pill core">dbt</span>
+            <span class="skill-pill">Fivetran</span>
+            <span class="skill-pill">Airbyte</span>
+            <span class="skill-pill">AWS Glue</span>
+            <span class="skill-pill">SSIS</span>
+            <span class="skill-pill">n8n</span>
+            <span class="skill-pill">Apache Kafka</span>
+          </div>
+        </div>
+        <div style="height:32px;"></div>
+        <div class="skill-group">
+          <h4>Cloud & Databases</h4>
+          <div class="skill-pills">
+            <span class="skill-pill core">Snowflake</span>
+            <span class="skill-pill core">AWS (S3, Glue, Athena, Redshift)</span>
+            <span class="skill-pill">GCP BigQuery</span>
+            <span class="skill-pill">Oracle</span>
+            <span class="skill-pill">PostgreSQL</span>
+            <span class="skill-pill">MySQL</span>
+            <span class="skill-pill">MongoDB</span>
+            <span class="skill-pill">Azure</span>
+          </div>
+        </div>
+        <div style="height:32px;"></div>
+        <div class="skill-group">
+          <h4>CRM & Integrations</h4>
+          <div class="skill-pills">
+            <span class="skill-pill">Salesforce</span>
+            <span class="skill-pill">HubSpot</span>
+            <span class="skill-pill">Alteryx</span>
+            <span class="skill-pill">Omeda</span>
+            <span class="skill-pill">Swoogo</span>
+          </div>
+        </div>
+        <div style="height:32px;"></div>
+        <div class="skill-group">
+          <h4>DevOps & Project Management</h4>
+          <div class="skill-pills">
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">GitHub CI/CD</span>
+            <span class="skill-pill">Docker</span>
+            <span class="skill-pill">JIRA</span>
+            <span class="skill-pill">Confluence</span>
+            <span class="skill-pill">Agile/Scrum</span>
+            <span class="skill-pill">MS Project</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION & CERTS -->
+<section id="education" class="edu-section">
+  <div class="container">
+    <span class="section-tag">Education</span>
+    <h2 class="section-title">Academic Background</h2>
+    <p class="section-sub">Graduate education in computer information systems, built on an engineering foundation from one of India's top technical institutes.</p>
+
+    <div class="edu-grid">
+      <div class="edu-card">
+        <span class="exp-badge badge-blue" style="margin-bottom:16px;display:inline-block;">Master's Degree</span>
+        <div class="edu-degree">MS, Computer Information Systems</div>
+        <div class="edu-school">University of Central Missouri</div>
+        <div class="edu-period">Aug 2023 – May 2025 · Warrensburg, MO</div>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.6;">Statistics, Data Analysis, Machine Learning, SQL, Python, Data Fluency, Database Design, Data Visualization · Teaching Assistant (2 years)</p>
+      </div>
+      <div class="edu-card">
+        <span class="exp-badge badge-purple" style="margin-bottom:16px;display:inline-block;">Bachelor's Degree</span>
+        <div class="edu-degree">BE, Industrial Engineering</div>
+        <div class="edu-school">S.G.S.I.T.S. Indore, India</div>
+        <div class="edu-period">Aug 2015 – Jun 2019</div>
+        <p style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.6;">Operations research, statistical process control, systems optimization. Event Manager — organized 10+ campus events with 200+ attendees.</p>
+      </div>
+    </div>
+
+    <span class="section-tag" style="margin-top:0;">Certifications</span>
+    <div class="certs-row">
+      <div class="cert-badge">
+        <span class="cert-icon">✅</span>
+        <div>
+          <div style="font-weight:600;font-size:13px;">SCRUM Certified</div>
+          <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;">Agile Framework</div>
+        </div>
+      </div>
+      <div class="cert-badge">
+        <span class="cert-icon">✅</span>
+        <div>
+          <div style="font-weight:600;font-size:13px;">Project Management</div>
+          <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;">Certified PM</div>
+        </div>
+      </div>
+      <div class="cert-badge">
+        <span class="cert-icon">✅</span>
+        <div>
+          <div style="font-weight:600;font-size:13px;">Agile Methodologies</div>
+          <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;">Scrum / Kanban</div>
+        </div>
+      </div>
+      <div class="cert-badge">
+        <span class="cert-icon">🏆</span>
+        <div>
+          <div style="font-weight:600;font-size:13px;">Infosys Innovation Award</div>
+          <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;">ML & Analytics Excellence</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <span class="section-tag" style="display:block;text-align:center;">Let's Connect</span>
+    <h2 class="section-title" style="text-align:center;">Open to Senior IC<br>& Lead Roles</h2>
+    <p class="contact-sub">Data Analyst · BI Developer · Data Engineer · Analytics Engineer<br>Chicago, IL · Remote or Hybrid · F-1 OPT (H1B sponsorship required)</p>
+    <div class="contact-links">
+      <a href="mailto:raghavpatidar997@gmail.com" class="contact-link primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+        raghavpatidar997@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/raghav-patidar-604527165/" target="_blank" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn Profile
+      </a>
+      <a href="tel:9132186727" class="contact-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.85a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        913-218-6727
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Raghav Patidar · Data Analyst & Engineer · Chicago, IL</span>
+  <span>Built for recruiters · Hosted on GitHub Pages</span>
+</footer>
+
+</body>
+</html>
